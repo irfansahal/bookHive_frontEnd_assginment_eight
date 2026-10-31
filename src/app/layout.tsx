@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono ,Archivo_Black } from "next/font/google";
 import "./globals.css";
+import Navbar from "./shared/Navbar";
+import Footer from "./shared/Footer";
+
+
+const archivoBlack = Archivo_Black({
+  subsets: ["latin" ],
+  weight: ["400"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,9 +29,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      data-theme="light"
+      className={`${archivoBlack.className}  h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col w-7xl mx-auto"
+      cz-shortcut-listen="true"
+      >
+        <Navbar/>
+        {children}
+        <Footer/>
+      </body>
     </html>
   );
 }
