@@ -35,12 +35,12 @@ const BookCard = ({bookId , image, title, author, category }: BookCardProps) => 
         <span className="w-fit rounded-full bg-[#e3d3ee] px-3 py-1 text-xs font-medium text-[#740378]">
           {category}
         </span>
-        <button
+        <Link href={`/allBooks/${bookId}`}><button
           type="button"
           className="mt-3 w-full cursor-pointer rounded-lg bg-[#740378] py-2.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-[#5c0260]"
         >
-          <Link href={`/allBooks/${bookId}`}>View Details</Link>
-        </button>
+          View Details
+        </button></Link>
       </div>
     </div>
   );

@@ -48,7 +48,7 @@ import AllBooksHeading from "../components/allBooks/AllBooksHeading";
 //   },
 // ];
 
-interface Book {
+export interface Book {
     authorName : string;
 bookImage: string ;
 booktitle: string ;

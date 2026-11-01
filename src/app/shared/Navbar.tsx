@@ -12,7 +12,7 @@ const pageLinks : PageLinks[] = [
 { name :  "Home" , label : "home" , href : "/" , isActive : true },
 { name :  " All Books" , label : "allBooks" , href : "/allBooks" , isActive : false },
 { name :  "Add Book" , label : "addbook" , href : "/addBook" , isActive : false },
-{ name :  "My Books" , label : "myBooks" , href : "#", isActive : false },
+{ name :  "My Books" , label : "myBooks" , href : "/myBooks", isActive : false },
 { name :  "My Borrows" , label : "myBorrows" , href : "#" , isActive : false}
 ]
 
