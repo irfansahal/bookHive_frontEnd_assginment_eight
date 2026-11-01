@@ -3,6 +3,7 @@ import { Geist, Geist_Mono ,Archivo_Black } from "next/font/google";
 import "./globals.css";
 import Navbar from "./shared/Navbar";
 import Footer from "./shared/Footer";
+import { ToastContainer } from "react-toastify";
 
 
 const archivoBlack = Archivo_Black({
@@ -32,12 +33,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="light"
       className={`${archivoBlack.className}  h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col w-7xl mx-auto"
+      <body className="min-h-full flex flex-col "
       cz-shortcut-listen="true"
       >
         <Navbar/>
         {children}
         <Footer/>
+        <ToastContainer />
       </body>
     </html>
   );

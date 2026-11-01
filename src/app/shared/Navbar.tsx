@@ -3,15 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import NavbarActions from './NavbarActions';
 
 interface PageLinks {
      name : string  , label : string , href : string , isActive : boolean
 }
 
 const pageLinks : PageLinks[] = [
-{ name :  "Home" , label : "home" , href : "#" , isActive : true },
-{ name :  "Add Book" , label : "addbook" , href : "#" , isActive : false },
+{ name :  "Home" , label : "home" , href : "/" , isActive : true },
+{ name :  " All Books" , label : "allBooks" , href : "/allBooks" , isActive : false },
+{ name :  "Add Book" , label : "addbook" , href : "/addBook" , isActive : false },
 { name :  "My Books" , label : "myBooks" , href : "#", isActive : false },
 { name :  "My Borrows" , label : "myBorrows" , href : "#" , isActive : false}
 ]
@@ -49,7 +49,10 @@ const Navbar = () => {
     </div>
     <div className="navbar-end gap-3">
       {/* <input type="text" placeholder="Search" className="input w-64 lg:w-auto" /> */}
-     
+       <div className='flex gap-2'>
+        <button className="btn btn-neutral bg-[#5f059f] border-0"><Link href={'/sign-up'}>Sgin Up</Link></button>
+        <button className="btn btn-outline btn-secondary"><Link href={'/sign-in'}>Sgin In</Link></button>
+       </div>
     </div>
   </div>
 
