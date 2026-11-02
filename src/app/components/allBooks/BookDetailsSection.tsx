@@ -1,9 +1,20 @@
 import React from "react";
 import Image from "next/image";
 import { Book } from "@/app/allBooks/page";
+import Borrowbutton from "../borrow/borrowbutton";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
 
 /* Static content only — no handlers */
-const BookDetailsSection = ({book} : {book : Book}) => {
+const BookDetailsSection = async ({book} : {book : Book}) => {
+
+const session = await auth.api.getSession({
+  headers : await headers()
+});
+
+const user = session?.user
+
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       {/* two divs, flex: left = image, right = book info */}
@@ -59,7 +70,10 @@ const BookDetailsSection = ({book} : {book : Book}) => {
 
         {/* brow button */}
         <div className="mt-10">
-          <button className="btn btn-outline btn-primary hover:bg-[#5f059f]">Borrow This Book</button>
+           <Borrowbutton 
+           book={book}
+           user={user}
+           />
         </div>
         </div>
       </div>

@@ -3,6 +3,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import ProfileModal from '../components/nav/profileModal';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 interface PageLinks {
      name : string  , label : string , href : string , isActive : boolean
@@ -13,12 +16,19 @@ const pageLinks : PageLinks[] = [
 { name :  " All Books" , label : "allBooks" , href : "/allBooks" , isActive : false },
 { name :  "Add Book" , label : "addbook" , href : "/addBook" , isActive : false },
 { name :  "My Books" , label : "myBooks" , href : "/myBooks", isActive : false },
-{ name :  "My Borrows" , label : "myBorrows" , href : "#" , isActive : false}
+{ name :  "My Borrows" , label : "myBorrows" , href : "/myborrows" , isActive : false}
 ]
 
 
-const Navbar = () => {
-    return (
+const Navbar = async () => {
+  
+  const session = await auth.api.getSession({
+    headers : await headers()
+  })
+  
+   const user = session?.user
+
+  return (
         
             <div className="max-lg:collapse h-[100px] bg-white lg:mb-0 shadow-sm w-full pt-5">
   <input id="navbar-1-toggle" className="peer hidden" type="checkbox" />
@@ -50,8 +60,12 @@ const Navbar = () => {
     <div className="navbar-end gap-3">
       {/* <input type="text" placeholder="Search" className="input w-64 lg:w-auto" /> */}
        <div className='flex gap-2'>
-        <button className="btn btn-neutral bg-[#5f059f] border-0"><Link href={'/sign-up'}>Sgin Up</Link></button>
+         {user ? <>
+           <ProfileModal userImage={user.image}/> 
+         </>: <>
+         <button className="btn btn-neutral bg-[#5f059f] border-0"><Link href={'/sign-up'}>Sgin Up</Link></button>
         <button className="btn btn-outline btn-secondary"><Link href={'/sign-in'}>Sgin In</Link></button>
+         </>}
        </div>
     </div>
   </div>
