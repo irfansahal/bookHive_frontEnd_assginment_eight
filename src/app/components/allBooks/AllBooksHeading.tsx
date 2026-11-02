@@ -4,7 +4,7 @@ import Image from "next/image";
 /* Content only — no links, no handlers */
 const AllBooksHeading = () => {
   return (
-    <div className="mb-10 flex  gap-10">
+    <div className="mb-10 flex flex-col gap-10 lg:flex-row ">
       {/* left div — heading + subheading */}
       <div className="flex w-full flex-col gap-10 lg:w-1/2 items-start justify-center">
         <h1 className="text-5xl font-light uppercase text-gray-900">

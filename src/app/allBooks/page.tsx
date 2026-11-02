@@ -60,6 +60,7 @@ description: string ;
 email: string ;
 name : string ;
 _id : string;
+copy : number;
 }
 
 const AllBooks = async () => {

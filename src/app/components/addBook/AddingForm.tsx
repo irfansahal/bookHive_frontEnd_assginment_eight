@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-import getTokenFromServer from "@/lib/getTokenFromServer";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
 import { redirect, useRouter } from "next/navigation";
 
@@ -47,6 +46,7 @@ const AddingForm = () => {
       category: string;
       bookImage: string;
       description: string;
+      copy : string;
     };
 
     console.log(bookData);
@@ -61,7 +61,7 @@ const AddingForm = () => {
         },
         body: JSON.stringify({
           ...bookData,
-          // ...formValue
+          copy : Number(bookData.copy)
         }),
       },
     );
@@ -76,7 +76,7 @@ const AddingForm = () => {
 
   return (
     <div className="">
-      <fieldset className="fieldset bg-[#e3d3ee] border-base-300 rounded-box w-full max-w-[500px] border p-4">
+      <fieldset className="fieldset bg-[#e3d3ee] border-base-300 rounded-box  w-full max-w-[500px] border p-4">
         {/* <legend className="fieldset-legend">Login</legend> */}
 
         <form onSubmit={submitHandler}>
@@ -136,6 +136,16 @@ const AddingForm = () => {
             // onChange={(event)=>setFormValue({...formValue, email : event.target.value})}
             readOnly
             name="email"
+          />
+
+          <label className="label ">Copies :</label>
+          <input
+            type="number"
+            className="input w-full"
+            defaultValue={0}
+            // onChange={(event)=>setFormValue({...formValue, email : event.target.value})}
+           
+            name="copy"
           />
 
           <button className="btn btn-neutral  bg-[#5f059f] mt-4" type="submit">

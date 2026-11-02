@@ -7,6 +7,7 @@ import { Navigation , Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import Link from 'next/link';
 
 //
 const HeroSlider = () => {
@@ -35,7 +36,9 @@ const HeroSlider = () => {
          <h1 className='text-5xl font-extrabold text-[#F5EBD8] text-shadow-lg text-shadow-[#0b030c]'>Discover Your Next Favorite</h1>
      <p className='font-extrabold text-white text-shadow-lg text-shadow-[#000000]'>Every book has a story waiting to be explored. Find your next favorite read and let every page take you somewhere new.</p>
      <div className='pt-30'>
+         <Link href={"/allBooks"}>
         <button className="btn btn-soft text-[#21033a]"> Browse Books</button>
+         </Link>
      </div>
     </div>
 </div>
@@ -54,7 +57,9 @@ const HeroSlider = () => {
          <h1 className='text-5xl font-extrabold text-[#000000] text-shadow-lg text-shadow-[#e4c2e8]'>Where Readers Connect</h1>
      <p className='font-extrabold text-[#000000] text-shadow-lg text-shadow-[#f2d1f0]'>Reading is even better when shared. Connect with fellow book lovers, exchange ideas, and build meaningful friendships.</p>
      <div className='pt-30'>
+         <Link href={"/allBooks"}>
         <button className="btn btn-soft text-[#21033a]"> Browse Books</button>
+         </Link>
      </div>
     </div>
 </div>
@@ -71,7 +76,9 @@ const HeroSlider = () => {
          <h1 className='text-5xl font-extrabold text-[#eed9d9] text-shadow-lg text-shadow-[#070108]'>Share Your Reading Journey</h1>
      <p className='font-extrabold text-[#ebdada] text-shadow-lg text-shadow-[#170416]'>Every reader has a unique journey. Share your favorite books, express your thoughts, and inspire others with your reading experiences.</p>
      <div className='pt-30'>
+         <Link href={"/allBooks"}>
         <button className="btn btn-soft text-[#21033a]"> Browse Books</button>
+         </Link>
      </div>
     </div>
 </div>
@@ -87,7 +94,9 @@ const HeroSlider = () => {
          <h1 className='text-5xl font-extrabold text-[#151111] text-shadow-lg text-shadow-[#eacdee]'>Let Every Page Inspire You</h1>
      <p className='font-extrabold text-[#1e1a1a] text-shadow-lg text-shadow-[#f1eef0]'>Discover new perspectives, explore different worlds, and make reading a beautiful part of your everyday life.</p>
      <div className='pt-30'>
+         <Link href={"/allBooks"}>
         <button className="btn btn-soft text-[#21033a]"> Browse Books</button>
+         </Link>
      </div>
     </div> 
   

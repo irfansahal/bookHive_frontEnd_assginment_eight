@@ -56,6 +56,10 @@ const user = session?.user
               <span className="w-32 shrink-0 text-gray-500">Added By :</span>
               <span className="text-gray-900">{book.name}</span>
             </div>
+             <div className="flex gap-4 py-3">
+              <span className="w-32 shrink-0 text-gray-500">Copies Are Abailble :</span>
+              <span className="text-gray-900">{book.copy}</span>
+            </div>
           </div>
 
           {/* description */}

@@ -96,11 +96,12 @@ const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
       });
       const borrowData = await res.json()
 
-      if(borrowData){
+      if(borrowData.ok){
         toast("You borrowed one item")
       }
-      if(!borrowBody){
-        toast.error("Some thing went wrong")
+      if(!borrowData.ok){
+        console.log(borrowData.message);
+        toast.error(`${borrowData.message}`)
       }
 
     }

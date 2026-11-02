@@ -1,4 +1,5 @@
 import HeroSection from "./home/HeroSection";
+import NewArrival from "./home/NewArrival";
 import AboutOurLibrary from "./shared/AboutOurLibrary";
 import DigitalResources from "./shared/DigitalResources";
 
@@ -9,6 +10,7 @@ export default function Home() {
     >
       <HeroSection/>
       <AboutOurLibrary/>
+      <NewArrival/>
       <DigitalResources/>
     </main>
   );
