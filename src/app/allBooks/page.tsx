@@ -1,6 +1,9 @@
 import React from "react";
 import BookCard from "../components/allBooks/BookCard";
 import AllBooksHeading from "../components/allBooks/AllBooksHeading";
+// import { authClient } from "@/lib/auth-client";
+// import { auth } from "@/lib/auth";
+// import { headers } from "next/headers";
 
 /* Static sample data — content only, no fetching yet */
 // const books = [
@@ -60,7 +63,7 @@ _id : string;
 }
 
 const AllBooks = async () => {
-
+ 
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/get-all-books`);
     const data = await response.json()
     console.log(data)
@@ -79,7 +82,7 @@ const AllBooks = async () => {
 
       {/* cards grid — responsive: 1 col on mobile, up to 4 cols on large screens */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 px-5 xl:px-30">
-        {books.map((book : Book) => (
+        {books?.map((book : Book) => (
           <BookCard
             key={book._id}
             bookId={book._id}

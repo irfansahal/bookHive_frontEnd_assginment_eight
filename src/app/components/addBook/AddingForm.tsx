@@ -1,7 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
+import getTokenFromServer from "@/lib/getTokenFromServer";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
+import { redirect, useRouter } from "next/navigation";
 
 const bookCategories: string[] = [
   "Fiction",
@@ -19,13 +22,23 @@ const AddingForm = () => {
   const { data: session, error } = authClient.useSession();
 
   const user = session?.user;
-
+  
+  // const [ formValue , setFormValue ] = useState({ email : user?.email , name : user?.name })
+  
+  const router = useRouter()
+  
   const submitHandler = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
 
-    if (!user) {
-      return toast.error("You must be logged in to add a book");
-    }
+    const { data : tokenData , error } = await  authClient.token()
+    // const token = tokenData?.token
+
+
+     const token = await getTokenFromClient()
+
+    // if (!user) {
+    //   return toast.error("You must be logged in to add a book");
+    // }
 
     const formData = new FormData(e.target);
     const bookData = Object.fromEntries(formData.entries()) as {
@@ -44,14 +57,20 @@ const AddingForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+           authorization : `Bearer ${token}`
         },
-        body: JSON.stringify(bookData),
+        body: JSON.stringify({
+          ...bookData,
+          // ...formValue
+        }),
       },
     );
     const data = await response.json();
 
     if (data) {
       toast("Book added successfully");
+       router.refresh()
+        redirect("/allBooks")
     }
   };
 
@@ -97,16 +116,14 @@ const AddingForm = () => {
           />
 
           <label className="label">Short Description</label>
-          <textarea  className="border-0 w-full p-2 bg-white" name="description" rows={4} cols={50} >
-            At w3schools.com you will learn how to make a website. They offer
-            free tutorials in all web development technologies.
-          </textarea>
-
+          <textarea  className="border-0 w-full p-2 bg-white" name="description" rows={4} cols={50} />
+         
           <label className="label">Name</label>
           <input
             type="text"
             className="input w-full"
             defaultValue={user?.name}
+            // onChange={(event) => setFormValue({...formValue, name : event.target.value})}
             readOnly
             name="name"
           />
@@ -116,6 +133,7 @@ const AddingForm = () => {
             type="email"
             className="input w-full"
             defaultValue={user?.email}
+            // onChange={(event)=>setFormValue({...formValue, email : event.target.value})}
             readOnly
             name="email"
           />
