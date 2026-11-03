@@ -28,6 +28,7 @@ const Navbar = async () => {
   
    const user = session?.user
 
+
   return (
         
             <div className="max-lg:collapse fixed left-0 top-0 w-full z-50 h-[100px] bg-white lg:mb-0 shadow-sm w-full pt-5">

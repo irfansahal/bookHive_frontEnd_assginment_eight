@@ -11,12 +11,12 @@ const NewArrival = async () => {
      const NewArrival = Data.sixNewArrivalsBooks
     return (
           <>
-       <div className="mb-10 flex flex-col items-center gap-3">
+       <div className="mb-10 flex flex-col items-center gap-3 ">
         <h1 className="text-3xl font-bold text-gray-900">New Arrival Collection</h1>
         <span className="h-1 w-12 rounded-full bg-[#740378]"></span>
       </div>
           
-           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 px-5 py-10 xl:px-30">
+           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 px-5  py-10 xl:px-50">
         {NewArrival?.map((book : Book) => (
           <BookCard
             key={book._id}

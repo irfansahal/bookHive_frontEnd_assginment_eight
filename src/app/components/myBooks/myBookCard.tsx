@@ -7,6 +7,7 @@ import { headers } from 'next/headers';
 import { Dialog } from '@base-ui/react';
 import Dailog from './dailog';
 import DeletingButton from './deletingButton';
+import NoBooks from './no-book';
 
 const MyBookCard = async  () => {
     
@@ -28,7 +29,7 @@ const MyBookCard = async  () => {
     return (
         
            <div className="flex flex-col items-center justify-center">
-            {myBooks.map((book : MyBook, index:number)=>{
+            {myBooks.length > 0 ? myBooks.map((book : MyBook, index:number)=>{
                 return   <div key={book._id}  className="mt-8 flex flex-col gap-5 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm w-[80%] lg:w-[70%] sm:flex-row">
                         {/* left div — image */}
                         <div>
@@ -71,7 +72,7 @@ const MyBookCard = async  () => {
                           
                         </div>
                     </div>
-            })}
+            }): <NoBooks/>}
            </div> 
         
     );

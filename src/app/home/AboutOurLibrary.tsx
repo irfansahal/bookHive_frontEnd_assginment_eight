@@ -32,7 +32,15 @@ const libraryServices = [
 /* Placeholder illustration (wooden card catalog) — replace with a real
    photo later via <Image src="/your-photo.jpg" fill className="object-cover" /> */
 
-const AboutOurLibrary = () => {
+const AboutOurLibrary = async () => {
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/category`);
+  const data = await res.json()
+
+  console.log("categoreis", data);
+  
+  const categories = data.categories
+
   return (
     <section className="px-6 py-14">
       {/* two divs, flex wrap: left = 4/6, right = 2/6 */}
@@ -41,22 +49,21 @@ const AboutOurLibrary = () => {
         <div className="flex w-full flex-wrap gap-6 lg:flex-[4]">
           {/* dark menu list */}
           <div className="flex w-full min-w-56 flex-1 flex-col justify-center bg-[#111111]">
-            {libraryServices.map((service) => (
+            {categories.map((category) => (
               <div
-                key={service.name}
+                key={category._id}
                 className={`border-b border-white/15 px-5 py-5 text-center font-bold ${
-                  service.isActive ? "text-white" : "text-neutral-400"
+                  category ? "text-white" : "text-neutral-400"
                 }`}
               >
-                {service.name}
+                {category.title}
               </div>
             ))}
           </div>
 
           {/* image */}
           <div className="relative min-h-72 w-full min-w-56 flex-1 overflow-hidden bg-[#7a5227]" 
-          
-          >
+           style={{ backgroundImage : "url('/CozyBookHiveLibraryRetreat.png')"}}>
             <h1>this about section</h1> 
           </div>
         </div>

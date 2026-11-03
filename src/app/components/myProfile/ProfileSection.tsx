@@ -60,7 +60,7 @@ const ProfileSection = async() => {
           {/* subheader */}
           <p className="flex items-center gap-1 text-sm text-zinc-500">
             {/* <EmailIcon className="h-4 w-4 text-zinc-400" /> */}
-            <span className="h-4 w-4 text-zinc-400">@</span>
+            {/* <span className="h-4  text-zinc-400">@</span> */}
             {user?.email}
           </p>
         </div>

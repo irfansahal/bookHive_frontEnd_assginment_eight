@@ -1,9 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { InputEvent, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
 import { redirect, useRouter } from "next/navigation";
+import Image from "next/image";
+// import { uploadFile } from "@/lib/upload";
 
 const bookCategories: string[] = [
   "Fiction",
@@ -19,21 +21,22 @@ const bookCategories: string[] = [
 
 const AddingForm = () => {
   const { data: session, error } = authClient.useSession();
+  // const [selectedFile, setSelectedFile] = useState(null);
+//  const [previewUrl, setPreviewUrl] = useState(null);
 
   const user = session?.user;
-  
+
   // const [ formValue , setFormValue ] = useState({ email : user?.email , name : user?.name })
-  
-  const router = useRouter()
-  
+
+  const router = useRouter();
+
   const submitHandler = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
 
-    const { data : tokenData , error } = await  authClient.token()
+    const { data: tokenData, error } = await authClient.token();
     // const token = tokenData?.token
 
-
-     const token = await getTokenFromClient()
+    const token = await getTokenFromClient();
 
     // if (!user) {
     //   return toast.error("You must be logged in to add a book");
@@ -46,10 +49,15 @@ const AddingForm = () => {
       category: string;
       bookImage: string;
       description: string;
-      copy : string;
+      copy: string;
     };
+    // if (selectedFile) {
+    //   const uploadedImage = await uploadFile(selectedFile);
 
-    console.log(bookData);
+    //   if (uploadedImage?.url) {
+    //     bookData.bookImage = uploadedImage.url;
+    //   }
+    // }
 
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/add-book`,
@@ -57,11 +65,11 @@ const AddingForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-           authorization : `Bearer ${token}`
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           ...bookData,
-          copy : Number(bookData.copy)
+          copy: Number(bookData.copy),
         }),
       },
     );
@@ -69,10 +77,19 @@ const AddingForm = () => {
 
     if (data) {
       toast("Book added successfully");
-       router.refresh()
-        redirect("/allBooks")
+      router.refresh();
+      redirect("/allBooks");
     }
   };
+
+  // const handleFileChange = (event: any) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     setSelectedFile(file);
+  //     // Create a temporary local URL for previewing the image
+  //     setPreviewUrl(URL.createObjectURL(file));
+  //   }
+  // };
 
   return (
     <div className="">
@@ -115,9 +132,32 @@ const AddingForm = () => {
             name="bookImage"
           />
 
+          {/* {previewUrl && (
+            <Image alt="Image " src={previewUrl} width={100} height={100} />
+          )}
+
+          <input
+            type="file"
+            accept="image/*" // Restricts file picker to images
+            onChange={handleFileChange}
+          /> */}
+
+          {/* <input
+            type="file"
+            className="input w-full"
+            placeholder="Book Image"
+            name="image"
+            accept="image"
+          /> */}
+
           <label className="label">Short Description</label>
-          <textarea  className="border-0 w-full p-2 bg-white" name="description" rows={4} cols={50} />
-         
+          <textarea
+            className="border-0 w-full p-2 bg-white"
+            name="description"
+            rows={4}
+            cols={50}
+          />
+
           <label className="label">Name</label>
           <input
             type="text"
@@ -144,7 +184,7 @@ const AddingForm = () => {
             className="input w-full"
             defaultValue={0}
             // onChange={(event)=>setFormValue({...formValue, email : event.target.value})}
-           
+
             name="copy"
           />
 

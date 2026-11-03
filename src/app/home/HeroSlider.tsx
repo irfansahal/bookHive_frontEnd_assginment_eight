@@ -12,7 +12,7 @@ import Link from 'next/link';
 //
 const HeroSlider = () => {
     return (
-        <div className=' text-black h-[650px] flex items-center'>
+        <div className=' text-black h-[750px] flex items-center'>
             <Swiper 
             modules={[Navigation, Pagination]}
             navigation={true}
@@ -23,7 +23,7 @@ const HeroSlider = () => {
              
     <SwiperSlide key={1} >
       <div
-  className="w-full h-[655px] bg-cover bg-center"
+  className="w-full h-[755px] bg-cover bg-center"
   style={{
     backgroundImage: `url('https://www.roombyroomdecor.com/images/blog/dreamy-dream-home-library-ideas-for-the-ultimate-book-sanctuary/96--15-Dreamy-Dream-Home-Library-Ideas-for-the-Ultimate-Book-Sanctuary-003.webp'),
      linear-gradient(
@@ -48,7 +48,7 @@ const HeroSlider = () => {
   
     <SwiperSlide key={2} >
       <div
-  className="w-full h-[655px] bg-cover bg-center"
+  className="w-full h-[755px] bg-cover bg-center"
   style={{
     backgroundImage: "url('https://static.wixstatic.com/media/7534fd_e78d0aee668f40d2a147e68c22820a06~mv2.png/v1/fill/w_740,h_415,al_c,lg_1,q_85,enc_avif,quality_auto/7534fd_e78d0aee668f40d2a147e68c22820a06~mv2.png')",
   }}
@@ -67,7 +67,7 @@ const HeroSlider = () => {
    
   <SwiperSlide key={3} >
       <div
-  className="w-full h-[655px] bg-cover bg-center"
+  className="w-full h-[755px] bg-cover bg-center"
   style={{
     backgroundImage: "url('https://images.unsplash.com/photo-1502485019198-a625bd53ceb7?utm_source=chatgpt.com')",
   }}
@@ -86,7 +86,7 @@ const HeroSlider = () => {
    
 <SwiperSlide key={4} >
       <div
-  className="w-full h-[655px] bg-cover bg-center"
+  className="w-full h-[755px] bg-cover bg-center"
   style={{
     backgroundImage: "url('https://myreadingvintage.com/cdn/shop/articles/Vintage_books_and_a_writing_pen_b308f09c-8b2c-4f60-a8d8-d4330fc69e3b_1400x.png?v=1780540111')",
   }}

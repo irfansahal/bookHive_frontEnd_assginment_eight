@@ -82,7 +82,7 @@ const [ formValue , setFormValue ] = useState<MyBook>({
             const data = await response.json();
         
             if (data) {
-              toast("Book added successfully");
+              toast("Book updated successfully");
               router.refresh()  
               redirect("/allBooks");
             }
