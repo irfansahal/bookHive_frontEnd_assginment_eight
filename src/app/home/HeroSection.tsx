@@ -4,7 +4,7 @@ import HeroSlider from './HeroSlider';
 
 const HeroSection = () => {
     return (
-        <div>
+        <div >
             
             <HeroSlider/>
         </div>

@@ -15,6 +15,8 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { getTokenFromClient } from "@/lib/getTokenFromClient"
+import { redirect, useRouter } from "next/navigation"
 import { useState } from "react"
 import { toast } from "react-toastify"
 
@@ -34,22 +36,24 @@ const bookCategories: string[] = [
 const Dailog = ({book } : { book : MyBook }) => {
 
 const [ formValue , setFormValue ] = useState<MyBook>({
-       authorName: book.authorName,
-    bookImage : book.bookImage ,
-    booktitle : book.booktitle ,
-    category : book.category ,
-    description : book.description ,
-    email : book.email ,  
-    name : book.name, 
-    _id : book._id,
-    createdAt : book.createdAt
+       authorName: book.authorName ?? "" ,
+    bookImage : book.bookImage ?? "" ,
+    booktitle : book.booktitle ?? "" ,
+    category : book.category ?? "",
+    description : book.description ?? "",
+    email : book.email ?? "",  
+    name : book.name ?? "", 
+    _id : book._id ?? "",
+    createdAt : book.createdAt ?? "",
+    copy : book.copy ?? ""
      })
 
+     const router = useRouter()
 
       const submitHandler = async (e :React.SubmitEvent<HTMLElement>) => {
        e.preventDefault()  
       console.log("jlkflsdfj")
-
+        
           const formData = new FormData(e.target);
             const bookData = Object.fromEntries(formData.entries()) as {
               booktitle: string;
@@ -57,24 +61,30 @@ const [ formValue , setFormValue ] = useState<MyBook>({
               category: string;
               bookImage: string;
               description: string;
+              copy : string
             };
         
             console.log(bookData);
         
+            const token = await getTokenFromClient()
+
             const response = await fetch(
               `${process.env.NEXT_PUBLIC_API_URL}/update-book/${book._id}`,
               {
                 method: "PATCH",
                 headers: {
                   "Content-Type": "application/json",
+                   authorization : `Bearer ${token}`
                 },
-                body: JSON.stringify(bookData),
+                body: JSON.stringify({...bookData, copy : Number(bookData.copy)}),
               },
             );
             const data = await response.json();
         
             if (data) {
               toast("Book added successfully");
+              router.refresh()  
+              redirect("/allBooks");
             }
     }
 
@@ -157,6 +167,15 @@ const [ formValue , setFormValue ] = useState<MyBook>({
            onChange={(event  )=>setFormValue({...formValue , name : event.target.value})}
               />
             </Field>
+
+            <Field>
+              <Label htmlFor="copy">Copies :</Label>
+              <Input id="copies" name="copy"   
+              value={formValue.copy}
+           onChange={(event  )=>setFormValue({...formValue , copy : event.target.value})}
+              />
+            </Field>
+
           </FieldGroup>
             <Button type="submit" className="mt-5">Save changes</Button>
            </form>

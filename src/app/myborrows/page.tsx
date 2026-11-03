@@ -24,7 +24,7 @@ const MyBorrows = async () => {
     
     return (
  <div className=" ">
-            <div className=" px-5 lg:px-20 py-10">
+            <div className=" px-5 lg:px-20 pt-20 pb-10">
                 {/* heading */}
                 <div className="pt-20 flex flex-col items-center  gap-4">
                    <h1 className='font-light text-[#5f059f] text-5xl'>My Borrows</h1>

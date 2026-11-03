@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
+import { getTokenFromClient } from '@/lib/getTokenFromClient';
 
 
 const DeletingButton = ({id}:{id : string}) => {
@@ -21,10 +22,15 @@ const DeletingButton = ({id}:{id : string}) => {
     const router = useRouter()
 
     const deletingHandler = async () => {
+
+        const token = await getTokenFromClient();
         console.log("successfully hit");
         
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/delete-book/${id}`,{
-            method : "DELETE"
+            method : "DELETE",
+            headers : {
+              authorization : `Bearer ${token}`
+            }
         })
         const data = await res.json();
         if(data){
@@ -36,7 +42,7 @@ const DeletingButton = ({id}:{id : string}) => {
     return (
         <>
          <AlertDialog>
-      <AlertDialogTrigger render={<button  className="btn btn-outline text-red-500  border-red-500">Show Dialog</button>} />
+      <AlertDialogTrigger render={<button  className="btn btn-outline text-red-500  border-red-500">Delete</button>} />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

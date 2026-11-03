@@ -73,7 +73,7 @@ const AllBooks = async () => {
 
 
     return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <section className="mx-auto w-full max-w-7xl px-4 pt-40 pb-10 sm:px-6 lg:px-8">
       {/* heading div */}
       <AllBooksHeading/>
       <div className="mb-10 flex flex-col items-center gap-3">

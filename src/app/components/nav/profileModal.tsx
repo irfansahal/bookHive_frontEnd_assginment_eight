@@ -16,8 +16,9 @@ import {
 import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
-const ProfileModal = ({userImage} : { userImage : string }) => {
+const ProfileModal = ({userImage} : { userImage : string | undefined | null}) => {
     console.log(userImage);
     
     const router = useRouter()
@@ -43,8 +44,10 @@ const ProfileModal = ({userImage} : { userImage : string }) => {
 } />
       <DropdownMenuContent>
         <DropdownMenuItem>
+        <Link href={'/myProfile'}>
           <UserIcon />
           Profile
+        </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <CreditCardIcon />

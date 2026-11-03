@@ -15,6 +15,7 @@ import { Field, FieldGroup } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
+import { getTokenFromClient } from "@/lib/getTokenFromClient"
 import { User } from "lucide-react"
 import React, { useState } from 'react';
 import { toast } from "react-toastify"
@@ -45,9 +46,12 @@ const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
     const borrowHandeler = async (e : React.SubmitEvent<HTMLElement>) => {
       e.preventDefault()
       const { data : session , error } = await authClient.getSession()
-       
+        
+      const token = await getTokenFromClient()
+         console.log("from server",token);
+         
         const user = session?.user;
-        console.log(user , book);
+        console.log(user , book,);
         
      const formData = new FormData(e.target);
      const userData = Object.fromEntries(formData.entries())as{
@@ -91,6 +95,7 @@ const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
         method : "POST",
         headers: {
           "Content-Type": "application/json",
+           authorization : `Bearer ${token}`
         },
         body : JSON.stringify(borrowBody)
       });

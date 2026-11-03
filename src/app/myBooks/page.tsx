@@ -15,7 +15,8 @@ export interface MyBook {
     email : string;  
     name : string ;
     _id : string;
-    createdAt? : string 
+    createdAt? : string ; 
+    copy : string
 }
 
 const MyBooks = async () => {
@@ -34,7 +35,7 @@ const MyBooks = async () => {
      console.log(data, myBooks)
     return (
         <div className=" ">
-            <div className=" px-5 lg:px-20 py-10">
+            <div className=" px-5 lg:px-20 pt-20 pb-10">
                 {/* heading */}
                 <div className="pt-20 flex flex-col items-center  gap-4">
                    <h1 className='font-light text-[#5f059f] text-5xl'>My Books</h1>

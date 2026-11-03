@@ -30,7 +30,7 @@ const Navbar = async () => {
 
   return (
         
-            <div className="max-lg:collapse h-[100px] bg-white lg:mb-0 shadow-sm w-full pt-5">
+            <div className="max-lg:collapse fixed left-0 top-0 w-full z-50 h-[100px] bg-white lg:mb-0 shadow-sm w-full pt-5">
   <input id="navbar-1-toggle" className="peer hidden" type="checkbox" />
   <label htmlFor="navbar-1-toggle" className="fixed inset-0 hidden max-lg:peer-checked:block"></label>
   <div className="collapse-title navbar">
@@ -70,9 +70,12 @@ const Navbar = async () => {
     </div>
   </div>
 
-  <div className="collapse-content lg:hidden z-1">
+  <div className="collapse-content bg-white w-[300px] lg:hidden z-1">
     <ul className="menu">
-      <li><button>Item 1</button></li>
+      {pageLinks.map((link : PageLinks, index)=>{
+           return <li key={index} className={link.isActive === true ? "underline" : "text-[#5f059f]"}><Link href={link.href} className='font-extrabold text-[16px]'>{link.name}</Link></li>
+        })}
+      {/* <li><button>Item 1</button></li> */}
       {/* <li>
         <button>Parent</button>
         <ul>
@@ -80,7 +83,7 @@ const Navbar = async () => {
           <li><button>Submenu 2</button></li>
         </ul>
       </li> */}
-      <li><button>Item 3</button></li>
+      {/* <li><button>Item 3</button></li> */}
     </ul>
   </div>
 </div>
