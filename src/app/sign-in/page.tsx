@@ -92,9 +92,13 @@ const SignIn = () => {
   <button className="btn btn-outline w-full border-2 border-[#5f059f] text-[#5f059f]" onClick={googleHandler}>Sign up with Google</button>
   <button className="btn btn-outline w-full border-2 border-[#5f059f] text-[#5f059f]" onClick={githubHandler}>Sign up with GitHub</button>
 
-   <div className='flex items-center justify-center py-3'>
-     <h1 className='font-bold text-[16px] text-zinc-500'> Don't have an account ? <span className='font-bold text-[#5f059f]'><Link href={'/sign-up'}>Sign Up</Link></span></h1>
+   <div className='flex items-center justify-center pt-3'>
+     <h1 className='font-bold text-[16px] text-zinc-500'> Don not have an account ? <span className='font-bold text-[#5f059f]'><Link href={'/sign-up'}>Sign Up</Link></span></h1>
     </div>
+   <div className='flex items-center   justify-center pb-3' >
+     <h1 className='font-bold text-[16px] text-zinc-500'>Forget password ? <span className='font-bold text-[#5f059f]'><Link href={'/sign-up'}>Click Here</Link></span></h1>
+    </div>
+    
 </fieldset>
                 </div>
             </div>

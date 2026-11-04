@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
 import { getTokenFromClient } from "@/lib/getTokenFromClient"
 import { User } from "lucide-react"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { toast } from "react-toastify"
 
 type User = {
@@ -101,21 +101,21 @@ const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
       });
       const borrowData = await res.json()
 
-      if(borrowData.ok){
+      if(res.ok){
         toast("You borrowed one item")
-      }
-      if(!borrowData.ok){
+      }else{
         console.log(borrowData.message);
         toast.error(`${borrowData.message}`)
       }
-
     }
+     
+     const disabled = book.copy <= 0
 
     return (
         <div>
               <Dialog>
       <>
-        <DialogTrigger render={<button className="btn btn-outline btn-primary hover:bg-[#5f059f]">Borrow This Book</button>} />
+        <DialogTrigger render={<button disabled={disabled}  className=" btn btn-outline btn-primary hover:bg-[#5f059f]">Borrow This Book</button>} />
         <DialogContent className="sm:max-w-sm">
           <DialogHeader>
             <DialogTitle>Edit profile</DialogTitle>
