@@ -2,6 +2,7 @@
 import React from 'react';
 import BookCard from '../components/allBooks/BookCard';
 import { Book } from '../allBooks/page';
+import Link from 'next/link';
 
 const NewArrival = async () => {
 
@@ -28,6 +29,11 @@ const NewArrival = async () => {
           />
         ))}
       </div>
+      <Link href={'/allBooks'}>
+      <div className='pb-10 flex justify-center'>
+        <button className="btn btn-soft text-[#56108f]">See All Books</button>
+      </div>
+      </Link>
       </> 
     );
 };

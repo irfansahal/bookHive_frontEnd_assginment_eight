@@ -17,6 +17,10 @@ It is a library website, where you can find a lot of collection of books in seve
 
 Only authenticated user can add collection, delete collection or update collection and even authentication is needed for borrowing a book , so it is going to be more suitable to be authenticated first 
 
+# What Added by myself
+
+there is a dynamic part in the home page in one extra section , which was added by myself. It was not recommended in assignment. It is category section,  if you click on one of  them , 'I mean one category' , you go to this specific category page , and then you can observe a collection of book of this specific category. That whole category page is dynamic, from heading , hero iamge to subheading and books card, this page takes everythins from database dynamicaly. For that I make a api endpoint in server, where two quaries are applied in the the same time  
+
 [Live link for website](https://bookhiveassignmenteightfrontend.vercel.app);
 
 ### Name : Irfan Taqi

@@ -18,8 +18,9 @@ import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const ProfileModal = ({userImage} : { userImage : string | undefined | null}) => {
+const ProfileModal = ({userImage , userName } : { userImage : string | undefined | null , userName : string}) => {
     console.log(userImage);
+    console.log("profile",userName);
     
     const router = useRouter()
 
@@ -50,13 +51,9 @@ const ProfileModal = ({userImage} : { userImage : string | undefined | null}) =>
         </DropdownMenuItem>
         </Link>
         <DropdownMenuItem>
-          <CreditCardIcon />
-          Billing
+          <span className="text-blue-600">{userName}</span>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <SettingsIcon />
-          Settings
-        </DropdownMenuItem>
+        
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive" onClick={logoutHandeler}>
           <LogOutIcon />

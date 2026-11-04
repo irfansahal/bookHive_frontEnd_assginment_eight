@@ -13,12 +13,14 @@ interface PageLinks {
 
 const pageLinks : PageLinks[] = [
 { name :  "Home" , label : "home" , href : "/" , isActive : true },
-{ name :  " All Books" , label : "allBooks" , href : "/allBooks" , isActive : false },
+{ name :  " All Books" , label : "allBooks" , href : "/allBooks" , isActive : false }
+]
+
+const privatePageLinks : PageLinks[] = [
 { name :  "Add Book" , label : "addbook" , href : "/addBook" , isActive : false },
 { name :  "My Books" , label : "myBooks" , href : "/myBooks", isActive : false },
 { name :  "My Borrows" , label : "myBorrows" , href : "/myborrows" , isActive : false}
 ]
-
 
 const Navbar = async () => {
   
@@ -27,7 +29,7 @@ const Navbar = async () => {
   })
   
    const user = session?.user
-
+  
 
   return (
         
@@ -46,6 +48,9 @@ const Navbar = async () => {
         {pageLinks.map((link : PageLinks, index)=>{
            return <li key={index} className={link.isActive === true ? "underline" : "text-[#5f059f]"}><Link href={link.href} className='font-extrabold text-[16px]'>{link.name}</Link></li>
         })}
+        { user && privatePageLinks.map((link : PageLinks, index)=>{
+           return <li key={index} className={link.isActive === true ? "underline" : "text-[#5f059f]"}><Link href={link.href} className='font-extrabold text-[16px]'>{link.name}</Link></li>
+        })}
         {/* <li>
           <details>
             <summary>Parent</summary>
@@ -62,7 +67,7 @@ const Navbar = async () => {
       {/* <input type="text" placeholder="Search" className="input w-64 lg:w-auto" /> */}
        <div className='flex gap-2'>
          {user ? <>
-           <ProfileModal userImage={user.image}/> 
+           <ProfileModal userImage={user?.image} userName={user?.name}/> 
          </>: <>
          <button className="btn btn-neutral bg-[#5f059f] border-0"><Link href={'/sign-up'}>Sgin Up</Link></button>
         <button className="btn btn-outline btn-secondary"><Link href={'/sign-in'}>Sgin In</Link></button>
@@ -74,6 +79,9 @@ const Navbar = async () => {
   <div className="collapse-content bg-white w-[300px] lg:hidden z-1">
     <ul className="menu">
       {pageLinks.map((link : PageLinks, index)=>{
+           return <li key={index} className={link.isActive === true ? "underline" : "text-[#5f059f]"}><Link href={link.href} className='font-extrabold text-[16px]'>{link.name}</Link></li>
+        })}
+        { user && privatePageLinks.map((link : PageLinks, index)=>{
            return <li key={index} className={link.isActive === true ? "underline" : "text-[#5f059f]"}><Link href={link.href} className='font-extrabold text-[16px]'>{link.name}</Link></li>
         })}
       {/* <li><button>Item 1</button></li> */}
