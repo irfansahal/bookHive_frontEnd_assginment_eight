@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 /* Right column (2 of 6): Library News — content only, no links */
@@ -29,7 +30,7 @@ const libraryServices = [
   { name: "Library Guides", isActive: false },
 ];
 
-interface Categories {
+export interface Categories {
     _id : string ;
     title : string ;
     label : string;
@@ -55,7 +56,8 @@ const AboutOurLibrary = async () => {
         {/* LEFT — 4 of 6 parts: menu + image (also flex wrap) */}
         <div className="flex w-full flex-wrap gap-6 lg:flex-[4]">
           {/* dark menu list */}
-          <div className="flex w-full min-w-56 flex-1 flex-col justify-center bg-[#111111]">
+          <div className="flex w-full min-w-56 flex-1 flex-col justify-center bg-gradient-to-r  from-[#141111] to-[#740378]">
+             <div className={`border-b border-white/15 px-5 py-5 text-center font-bold text-[#c087e9]`}> All Categories </div>
             {categories.map((category : Categories) => (
               <div
                 key={category._id}
@@ -63,15 +65,19 @@ const AboutOurLibrary = async () => {
                   category ? "text-white" : "text-neutral-400"
                 }`}
               >
+                <Link href={`/category/${category.title}`}>
                 {category.title}
+                </Link>
               </div>
             ))}
           </div>
 
           {/* image */}
           <div className="relative min-h-72 w-full min-w-56 flex-1 overflow-hidden bg-[#7a5227]" 
-           style={{ backgroundImage : "url('/CozyBookHiveLibraryRetreat.png')"}}>
-            <h1>this about section</h1> 
+           >
+            <div className="w-full h-full" style={{ backgroundImage : "url('/CozyBookHiveLibraryRetreat.png')"}}>
+
+            </div> 
           </div>
         </div>
 

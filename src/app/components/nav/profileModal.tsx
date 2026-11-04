@@ -43,12 +43,12 @@ const ProfileModal = ({userImage} : { userImage : string | undefined | null}) =>
 </button>
 } />
       <DropdownMenuContent>
-        <DropdownMenuItem>
         <Link href={'/myProfile'}>
+        <DropdownMenuItem>
           <UserIcon />
           Profile
-        </Link>
         </DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>
           <CreditCardIcon />
           Billing
