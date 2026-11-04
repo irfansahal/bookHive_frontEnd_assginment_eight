@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label"
 import { authClient } from "@/lib/auth-client"
 import { getTokenFromClient } from "@/lib/getTokenFromClient"
 import { User } from "lucide-react"
+import { useRouter } from "next/navigation"
 import React, { useEffect, useState } from 'react';
 import { toast } from "react-toastify"
 
@@ -42,6 +43,7 @@ export interface Borrow {
 }
 const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
     
+   const router = useRouter()
     
     const borrowHandeler = async (e : React.SubmitEvent<HTMLElement>) => {
       e.preventDefault()
@@ -100,8 +102,9 @@ const Borrowbutton = ({book , user } : {book :Book ; user : User }) => {
         body : JSON.stringify(borrowBody)
       });
       const borrowData = await res.json()
-
+      
       if(res.ok){
+        router.refresh()
         toast("You borrowed one item")
       }else{
         console.log(borrowData.message);

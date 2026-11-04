@@ -69,8 +69,8 @@ const Navbar = async () => {
          {user ? <>
            <ProfileModal userImage={user?.image} userName={user?.name}/> 
          </>: <>
-         <button className="btn btn-neutral bg-[#5f059f] border-0"><Link href={'/sign-up'}>Sgin Up</Link></button>
-        <button className="btn btn-outline btn-secondary"><Link href={'/sign-in'}>Sgin In</Link></button>
+         <Link href={'/sign-up'}><button className="btn btn-neutral bg-[#5f059f] border-0">Sgin Up</button></Link>
+        <Link href={'/sign-in'}><button className="btn btn-outline btn-secondary">Sgin In</button></Link>
          </>}
        </div>
     </div>
