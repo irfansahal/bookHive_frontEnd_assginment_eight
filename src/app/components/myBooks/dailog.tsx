@@ -16,8 +16,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { getTokenFromClient } from "@/lib/getTokenFromClient"
+import { uploadFile } from "@/lib/upload"
+import Image from "next/image"
 import { redirect, useRouter } from "next/navigation"
-import { useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { toast } from "react-toastify"
 
 
@@ -47,13 +49,15 @@ const [ formValue , setFormValue ] = useState<MyBook>({
     createdAt : book.createdAt ?? "",
     copy : book.copy ?? ""
      })
-
+const [ selectedImage , setSelectedImage ] = useState<File | null>(null)
+const [ prevImage , setPrevImage ] = useState<string | null>(null)
+    
      const router = useRouter()
 
       const submitHandler = async (e :React.SubmitEvent<HTMLElement>) => {
-       e.preventDefault()  
+        e.preventDefault()  
       console.log("jlkflsdfj")
-        
+    
           const formData = new FormData(e.target);
             const bookData = Object.fromEntries(formData.entries()) as {
               booktitle: string;
@@ -67,6 +71,15 @@ const [ formValue , setFormValue ] = useState<MyBook>({
             console.log(bookData);
         
             const token = await getTokenFromClient()
+       
+            if(selectedImage){
+        const ImageBBURL = await uploadFile(selectedImage);
+
+        if(ImageBBURL?.data?.url){
+            bookData.bookImage = ImageBBURL?.data?.url 
+        }
+        }
+
 
             const response = await fetch(
               `${process.env.NEXT_PUBLIC_API_URL}/update-book/${book._id}`,
@@ -88,7 +101,13 @@ const [ formValue , setFormValue ] = useState<MyBook>({
             }
     }
 
-
+     const handleImageUpload = (e : ChangeEvent<HTMLInputElement>) => {
+       const file = e.target.files?.[0];
+       if(file){
+        setSelectedImage(file);
+        setPrevImage(URL.createObjectURL(file))
+       }
+     }
 
     return (
       
@@ -147,10 +166,13 @@ const [ formValue , setFormValue ] = useState<MyBook>({
               </Field>
             <Field>
               <Label htmlFor="bookImage">Book Image</Label>
-              <Input id="bookImage" name="bookImage" defaultValue="Pedro Duarte" 
-              value={formValue.bookImage}
-           onChange={(event  )=>setFormValue({...formValue , bookImage : event.target.value})}
-              />
+              <Input id="bookImage"  
+           onChange={handleImageUpload}
+               type="file"
+               />
+              {prevImage && (
+                <Image alt="uploadImage" src={prevImage} width={200} height={100}/>  
+              )}
             </Field>
             <Field>
               <Label htmlFor="email">Email</Label>

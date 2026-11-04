@@ -1,10 +1,11 @@
 "use client";
-import React, { InputEvent, useState } from "react";
+import React, { ChangeEvent, InputEvent, useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
+import { uploadFile } from "@/lib/upload";
 // import { uploadFile } from "@/lib/upload";
 
 const bookCategories: string[] = [
@@ -23,6 +24,9 @@ const AddingForm = () => {
   const { data: session, error } = authClient.useSession();
   // const [selectedFile, setSelectedFile] = useState(null);
 //  const [previewUrl, setPreviewUrl] = useState(null);
+
+const [selectedImage , setSelectedImage ] = useState<File | null>(null);
+const [ prevImage, setPrevImage ] = useState<string | null>(null)
 
   const user = session?.user;
 
@@ -59,6 +63,12 @@ const AddingForm = () => {
     //   }
     // }
 
+    if(selectedImage){
+      const ImageBBURL = await uploadFile(selectedImage)
+      if(ImageBBURL?.data?.url){
+          bookData.bookImage = ImageBBURL?.data?.url 
+      }
+    }
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/add-book`,
       {
@@ -81,6 +91,16 @@ const AddingForm = () => {
       redirect("/allBooks");
     }
   };
+
+   const handleImageChange = (e : ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if(file){
+          setSelectedImage(file)
+          setPrevImage(URL.createObjectURL(file))
+        }
+   }
+
+
 
   // const handleFileChange = (event: any) => {
   //   const file = event.target.files[0];
@@ -124,14 +144,27 @@ const AddingForm = () => {
             })}
           </select>
 
-          <label className="label">Book Image</label>
+          {/* <label className="label">Book Image</label>
           <input
             type="text"
             className="input w-full"
             placeholder="Book Image"
             name="bookImage"
-          />
+          /> */}
 
+
+          <label className="label">Book Image</label>
+          <input
+            type="file"
+            className="input w-full"
+            placeholder="Book Image"
+            // name="bookImage"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          { prevImage && (
+              <Image alt="uploadImage" src={prevImage} width={200} height={100} className="p-5"/>
+          )}
           {/* {previewUrl && (
             <Image alt="Image " src={previewUrl} width={100} height={100} />
           )}

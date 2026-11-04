@@ -29,6 +29,13 @@ const libraryServices = [
   { name: "Library Guides", isActive: false },
 ];
 
+interface Categories {
+    _id : string ;
+    title : string ;
+    label : string;
+    imageurl : string ;
+}
+
 /* Placeholder illustration (wooden card catalog) — replace with a real
    photo later via <Image src="/your-photo.jpg" fill className="object-cover" /> */
 
@@ -49,7 +56,7 @@ const AboutOurLibrary = async () => {
         <div className="flex w-full flex-wrap gap-6 lg:flex-[4]">
           {/* dark menu list */}
           <div className="flex w-full min-w-56 flex-1 flex-col justify-center bg-[#111111]">
-            {categories.map((category) => (
+            {categories.map((category : Categories) => (
               <div
                 key={category._id}
                 className={`border-b border-white/15 px-5 py-5 text-center font-bold ${
